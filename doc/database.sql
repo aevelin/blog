@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2018 at 01:27 PM
+-- Generation Time: Feb 15, 2018 at 02:08 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -32,12 +33,6 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- RELATIONSHIPS FOR TABLE `post`:
---   `user_id`
---       `users` -> `user_id`
---
-
---
 -- Dumping data for table `post`
 --
 
@@ -60,10 +55,6 @@ CREATE TABLE `translations` (
   `controller` varchar(15) NOT NULL,
   `action` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `translations`:
---
 
 --
 -- Dumping data for table `translations`
@@ -94,7 +85,8 @@ INSERT INTO `translations` (`translation_id`, `phrase`, `language`, `translation
 (22, 'Sign in', 'en', '{untranslated}', 'global', 'global'),
 (23, 'Oops...', 'en', '{untranslated}', 'global', 'global'),
 (24, 'Close', 'en', '{untranslated}', 'global', 'global'),
-(25, 'Server returned an error. Please try again later ', 'en', '{untranslated}', 'global', 'global');
+(25, 'Server returned an error. Please try again later ', 'en', '{untranslated}', 'global', 'global'),
+(26, 'Wrong username or password', 'en', '{untranslated}', 'global', 'global');
 
 -- --------------------------------------------------------
 
@@ -111,10 +103,6 @@ CREATE TABLE `users` (
   `deleted` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `name` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `users`:
---
 
 --
 -- Dumping data for table `users`
@@ -161,7 +149,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `translation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `translation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -178,4 +166,5 @@ ALTER TABLE `users`
 --
 ALTER TABLE `post`
   ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
