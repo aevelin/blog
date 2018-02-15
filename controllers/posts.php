@@ -1,6 +1,6 @@
 <?php namespace App;
 
-class welcome extends Controller
+class posts extends Controller
 {
 
     /**
@@ -12,9 +12,15 @@ class welcome extends Controller
     function index()
     {
 
-        $this->users = get_all("SELECT * FROM users");
+        $this->posts = get_all("SELECT * FROM post");
     }
 
+    /** Post view */
+
+    function view() {
+        $post_id = $this->params[0];
+        $this->post = get_first("SELECT * FROM post NATURAL JOIN users WHERE post_id='$post_id'");
+    }
     /**
      * This function will only be ran in case of an AJAX request. No view will be attempted to load after this function.
      */
